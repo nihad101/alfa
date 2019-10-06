@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Invoice";
+}
+<div class="row">
+    <div class="col-12">
+        @(Html.Kendo().Grid<AlfaSample.Models.InvoiceViewModel>()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.InvoiceNumber);
+                columns.Bound(p => p.InvoiceDate).Format("{0:MM/dd/yyyy}");
+                columns.Bound(p => p.StartDate).Format("{0:MM/dd/yyyy}");
+                columns.Bound(p => p.EndDate).Format("{0:MM/dd/yyyy}");
+                columns.Bound(p => p.CompanyName);
+                columns.Bound(p => p.Charge).EditorTemplateName("ChargeType").Sortable(false);
+                columns.Bound(p => p.Rate);
+                columns.Bound(p => p.Units);
+                columns.Bound(p => p.Amount);
+                columns.Bound(p => p.Tax);
+                columns.Bound(p => p.Total);
+                columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+            })
+            .ToolBar(toolbar => toolbar.Create())
+            .Editable(editable => editable.Mode(GridEditMode.PopUp))
+            .Pageable()
+            .Sortable()
+            .Scrollable()
+            .Filterable()
+            .HtmlAttributes(new { style = "height:550px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Model(model => model.Id(p => p.CompanyName))
+                .Events(events => events.Error("error_handler"))
+                .Create(update => update.Action("Create", "InvoiceGrid"))
+                .Read(read => read.Action("Read", "InvoiceGrid"))
+                .Update(read => read.Action("Update", "InvoiceGrid"))
+                .Destroy(read => read.Action("Delete", "InvoiceGrid"))
+                .PageSize(20)
+                .ServerOperation(false)
+            )
+        )
+
+        <script type="text/javascript">
+            function error_handler(e) {
+                if (e.errors) {
+                    var message = "Errors:\n";
+                    $.each(e.errors, function (key, value) {
+                        if ('errors' in value) {
+                            $.each(value.errors, function () {
+                                message += this + "\n";
+                            });
+                        }
+                    });
+                    alert(message);
+                }
+            }
+        </script>
+    </div>
+</div>
+
+

@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="row">
+    <div class="col-12">
+        @(Html.Kendo().Grid<AlfaSample.Models.ClientViewModel>()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.CompanyName);
+                columns.Bound(p => p.Address);
+                columns.Bound(p => p.City);
+                columns.Bound(p => p.ContactPerson);
+                columns.Bound(p => p.Contract);
+                columns.Bound(p => p.ContractDateStart).Format("{0:MM/dd/yyyy}");
+                columns.Bound(p => p.ContractDateEnd).Format("{0:MM/dd/yyyy}");
+                columns.Bound(p => p.Status).EditorTemplateName("StatusType").Sortable(false);
+                columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+            })
+            .ToolBar(toolbar => toolbar.Create())
+            .Editable(editable => editable.Mode(GridEditMode.PopUp))
+            .Pageable()
+            .Sortable()
+            .Scrollable()
+            .Filterable()
+            .HtmlAttributes(new { style = "height:550px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Model(model => model.Id(p => p.CompanyName))
+                .Events(events => events.Error("error_handler"))
+                .Create(update => update.Action("Create", "ClientGrid"))
+                .Read(read => read.Action("Read", "ClientGrid"))
+                .Update(read => read.Action("Update", "ClientGrid"))
+                .Destroy(read => read.Action("Delete", "ClientGrid"))
+                .PageSize(20)
+                .ServerOperation(false)
+            )
+        )
+
+        <script type="text/javascript">
+            function error_handler(e) {
+                if (e.errors) {
+                    var message = "Errors:\n";
+                    $.each(e.errors, function (key, value) {
+                        if ('errors' in value) {
+                            $.each(value.errors, function () {
+                                message += this + "\n";
+                            });
+                        }
+                    });
+                    alert(message);
+                }
+            }
+        </script>
+    </div>
+</div>
