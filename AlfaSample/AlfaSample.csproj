@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClientGridController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceChartController.cs" />
     <Compile Include="Controllers\InvoiceGridController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -146,6 +147,7 @@
     <Compile Include="Helpers\EnumHelpers.cs" />
     <Compile Include="Infrastructure\AutoMapperProfile.cs" />
     <Compile Include="Models\ClientViewModel.cs" />
+    <Compile Include="Models\InvoiceChartViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

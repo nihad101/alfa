@@ -21,5 +21,12 @@ namespace AlfaSample.Controllers
 
             return View();
         }
+
+        public ActionResult InvoiceChart()
+        {
+            ViewBag.Message = "InvoiceChart View";
+
+            return View();
+        }
     }   
 }

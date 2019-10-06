@@ -14,6 +14,7 @@ namespace AlfaSample.Infrastructure
         {
             CreateMap<Client, ClientViewModel>();
             CreateMap<Invoice, InvoiceViewModel>();
+            CreateMap<InvoiceChart, InvoiceChartViewModel>();
         }
 
         public static void Run()

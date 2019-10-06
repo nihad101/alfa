@@ -1,7 +1,84 @@
 ﻿
 @{
-    ViewBag.Title = "InvoiceChart";
+    ViewBag.Title = "Invoice Chart";
 }
 
 <h2>InvoiceChart</h2>
 
+<div class="row">
+    <div class="col-12">
+        <form>
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInput">Year</label>
+                    <input type="text" class="form-control mb-2" id="year" placeholder="Year">
+                </div>
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Month</label>
+                    <input type="text" class="form-control mb-2" id="month" placeholder="Month">
+                </div>
+                <div class="col-auto">
+
+                    @(Html.Kendo().Button()
+                            .Name("textButton")
+                            .Content("Submit")
+                            .HtmlAttributes(new { type = "button", @class = "btn btn-primary mb-2" })
+                            .Events(ev => ev.Click("onClick")))
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-1 col-form-label">Year:</label>
+            <div class="col-sm-2">
+                <input type="text" readonly class="form-control-plaintext" id="idYear">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="idMonth" class="col-sm-1 col-form-label">Month:</label>
+            <div class="col-sm-2">
+                <input type="text" readonly class="form-control-plaintext" id="idMonth">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="idDay" class="col-sm-1 col-form-label">Day:</label>
+            <div class="col-sm-2">
+                <input type="text" readonly class="form-control-plaintext" id="idDay">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="idNight" class="col-sm-1 col-form-label">Night:</label>
+            <div class="col-sm-2">
+                <input type="text" readonly class="form-control-plaintext" id="idNight">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="idWeekend" class="col-sm-1 col-form-label">Year:</label>
+            <div class="col-sm-2">
+                <input type="text" readonly class="form-control-plaintext" id="idWeekend">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function onClick() {
+        $.ajax({
+            url: '/invoicechart/index',
+            data: { year: $('#year').val(), month: $('#month').val() }
+        }).done(function (result) {
+            $('#idYear').val(result.Year);
+            $('#idMonth').val(result.Month);
+            $('#idDay').val(result.Day);
+            $('#idNight').val(result.Night);
+            $('#idWeekend').val(result.Weekend);
+        }).fail(function (errr) {
+            // do something with the error
+        });
+    }
+</script>
