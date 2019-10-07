@@ -77,7 +77,7 @@ namespace AlfaSample.Data.Services
             var sqlResult =
                 db.Database.ExecuteSqlCommand("dbo.spImportInvoice @path", new SqlParameter("@path", path));
 
-            return true;
+            return sqlResult > 0;
         }
     }
 }
