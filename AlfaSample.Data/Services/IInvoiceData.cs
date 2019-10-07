@@ -15,5 +15,6 @@ namespace AlfaSample.Data.Services
         void Update(Invoice invoice);
         void Delete(string invoiceNumber, string companyName);
         InvoiceChart GetInvoiceChart(int year, int month);
+        bool ImportInvoice(String path);
     }
 }

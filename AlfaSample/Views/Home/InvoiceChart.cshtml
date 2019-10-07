@@ -3,7 +3,7 @@
     ViewBag.Title = "Invoice Chart";
 }
 
-<h2>InvoiceChart</h2>
+<h2>Invoice Chart</h2>
 
 <div class="row">
     <div class="col-12">
@@ -68,6 +68,11 @@
 
 <script type="text/javascript">
     function onClick() {
+        if ($('#year').val() == '' || $('#month').val() == '') {
+            alert('Please set Year and Month first.');
+            return;
+        }
+
         $.ajax({
             url: '/invoicechart/index',
             data: { year: $('#year').val(), month: $('#month').val() }
@@ -79,6 +84,7 @@
             $('#idWeekend').val(result.Weekend);
         }).fail(function (errr) {
             // do something with the error
+            alert(errr)
         });
     }
 </script>

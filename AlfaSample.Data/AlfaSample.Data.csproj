@@ -61,10 +61,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201910060007565_ANewMigration.cs" />
-    <Compile Include="Migrations\201910060007565_ANewMigration.Designer.cs">
-      <DependentUpon>201910060007565_ANewMigration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migration\Configuration.cs" />
     <Compile Include="Models\ChargeType.cs" />
     <Compile Include="Models\Client.cs" />
@@ -83,14 +79,10 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910060007565_ANewMigration.resx">
-      <DependentUpon>201910060007565_ANewMigration.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Content Include="Sql\spInvoiceChart.sql" />
+    <Content Include="Sql\spInvoiceImport.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

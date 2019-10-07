@@ -55,19 +55,29 @@ namespace AlfaSample.Data.Services
         {
             var paramYear = new SqlParameter("@year", year);
             var paramMonth = new SqlParameter("@month", month);
-            var sqlResult = db.Database.SqlQuery<InvoiceChartDTO>("dbo.GetInvoiceChartData @year, @month", 
-                paramYear, paramMonth).ToList();
+
+            var sqlResult =
+                db.Database.SqlQuery<InvoiceChartDTO>
+                ("dbo.GetInvoiceChartData @year, @month", paramYear, paramMonth).ToList();
 
             var invoiceChart = new InvoiceChart() 
-            {
-                Year = year,
-                Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month),
-                Day = sqlResult.FirstOrDefault(x => x.Charge == ChargeType.Day).Total,
-                Night = sqlResult.FirstOrDefault(x => x.Charge == ChargeType.Night).Total,
-                Weekend = sqlResult.FirstOrDefault(x => x.Charge == ChargeType.Weekend).Total,
-            };
+                                {
+                                    Year = year,
+                                    Month = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month),
+                                    Day = sqlResult.FirstOrDefault(x => x.Charge == ChargeType.Day).Total,
+                                    Night = sqlResult.FirstOrDefault(x => x.Charge == ChargeType.Night).Total,
+                                    Weekend = sqlResult.FirstOrDefault(x => x.Charge == ChargeType.Weekend).Total,
+                                };
 
             return invoiceChart;
+        }
+
+        public bool ImportInvoice(String path) {
+
+            var sqlResult =
+                db.Database.ExecuteSqlCommand("dbo.spImportInvoice @path", new SqlParameter("@path", path));
+
+            return true;
         }
     }
 }

@@ -20,11 +20,9 @@ namespace AlfaSample.Controllers
         // GET: InvoiceChart
         public ActionResult Index(int year, int month)
         {
-            InvoiceChartViewModel viewModel = new InvoiceChartViewModel();
-
+            var viewModel = new InvoiceChartViewModel();
             var invoiceChart = invoiceDb.GetInvoiceChart(year, month);
             Mapper.Map(invoiceChart, viewModel);
-            ViewBag.ChartModel = viewModel;
 
             return Json(viewModel, JsonRequestBehavior.AllowGet);
         }

@@ -1,11 +1,14 @@
-﻿USE AlfaSampleDb
+﻿USE [AlfaSampleDb]
+GO
+
+DROP PROCEDURE [dbo].[GetInvoiceChartData]
+GO
 
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 CREATE PROCEDURE [dbo].[GetInvoiceChartData]
    @year int,

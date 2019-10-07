@@ -28,5 +28,12 @@ namespace AlfaSample.Controllers
 
             return View();
         }
+
+        public ActionResult InvoiceImport()
+        {
+            ViewBag.Message = "InvoiceImport View";
+
+            return View();
+        }
     }   
 }

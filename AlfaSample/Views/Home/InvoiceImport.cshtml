@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "InvoiceImport";
+}
+
+<h2>Invoice Import</h2>
+
+<div class="row">
+    <div class="col-12">
+        <div class="demo-section k-content">
+            @(Html.Kendo().Upload()
+                .Name("files")
+                .Async(a => a
+                    .Save("Save", "ImportInvoice")
+                    .Remove("Remove", "ImportInvoice")
+                    .AutoUpload(true)
+                )
+            )
+        </div>
+    </div>
+</div>
+
